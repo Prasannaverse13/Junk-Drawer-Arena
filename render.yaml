@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: junk-drawer-arena
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/status
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: OPENAI_MODEL
+        value: gpt-6-luna
+      - key: LUX3D_VERSION
+        value: G1-Turbo
+      - key: LUX3D_PART_SPLIT
+        value: "1"
+      - key: LUX3D_FACE_COUNT
+        value: "20000"
+      - key: AHOLO_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
