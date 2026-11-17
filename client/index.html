@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f377d" />
+    <title>Junk Drawer Arena · Your stuff. Real parts. Real fights.</title>
+    <meta name="description" content="Snap any object at home. Aholo Lux3D turns it into a 3D fighter made of its real parts. Battle friends on one screen with phones as controllers." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ffb81c'/><text x='50' y='72' font-size='64' text-anchor='middle' font-family='Arial Black' fill='white' stroke='black' stroke-width='4'>J</text></svg>" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet" href="./src/landing.css" />
+  </head>
+  <body class="land">
+    <header class="l-head">
+      <a class="l-badge" href="/" aria-label="Junk Drawer Arena home">
+        <span class="mark o">J</span>
+        <span class="o">Junk Drawer Arena</span>
+      </a>
+      <nav class="l-nav">
+        <a href="#how">How it works</a>
+        <a href="#cards">Card power</a>
+        <a href="#elements">Elements</a>
+        <a href="#battle">Battle rules</a>
+        <a href="#progress">Progress</a>
+      </nav>
+      <div class="l-acct" id="acct"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="l-hero">
+      <div class="l-hero-art">
+        <img src="/img/hero-fight.jpg" alt="Three household objects fighting on a grass arena" />
+        <div class="l-sticker o">Real parts break off</div>
+      </div>
+      <div class="l-hero-copy">
+        <h1 class="o">Your stuff. Real parts. Real fights.</h1>
+        <p>Snap a photo of anything in your home. Aholo Lux3D builds it in 3D and splits it into the parts it is really made of. Then it fights. Hard hits knock those parts right off.</p>
+        <div class="l-cta" id="hero-cta"></div>
+        <small class="l-note">Free. Plays in the browser. Phones become controllers.</small>
+      </div>
+    </section>
+
+    <div class="l-divider"><i class="ic coin"></i><i class="ic trophy"></i><i class="ic gem"></i></div>
+
+    <!-- HOW -->
+    <section class="l-sec" id="how">
+      <h2 class="o">How it works</h2>
+      <p class="l-lead">Four steps from your junk drawer to the arena.</p>
+      <ol class="l-steps">
+        <li class="panel">
+          <i class="ic cam"></i>
+          <h3 class="o">Snap it</h3>
+          <p>Scan the QR code with your phone and take a photo of one object. A mug, a shoe, a toy, a pan.</p>
+        </li>
+        <li class="panel">
+          <i class="ic cards"></i>
+          <h3 class="o">Lux3D builds it</h3>
+          <p>Aholo Lux3D turns the photo into a 3D model in about two minutes, then splits it into its real parts like a handle, a lid or a sole.</p>
+        </li>
+        <li class="panel">
+          <i class="ic bolt"></i>
+          <h3 class="o">AI makes the card</h3>
+          <p>An AI agent looks at the photo and works out the material, real size and weight. That decides the stats, the special move and the trash talk.</p>
+        </li>
+        <li class="panel">
+          <i class="ic swords"></i>
+          <h3 class="o">Battle</h3>
+          <p>Two to four fighters drop into the arena. Real physics decides every hit. Last one standing wins.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- CARD POWER -->
+    <section class="l-sec alt" id="cards">
+      <h2 class="o">Where card power comes from</h2>
+      <p class="l-lead">Nothing is random. Every number comes from the real object.</p>
+      <div class="l-split">
+        <div class="panel l-stats">
+          <div class="panel-head o">The four stats</div>
+          <div class="body">
+            <div class="l-stat"><b class="o">Power</b><span>How hard it hits. Dense and heavy things like cast iron hit hardest.</span></div>
+            <div class="l-stat"><b class="o">Speed</b><span>How fast it moves and how fast its energy refills. Light things are quick.</span></div>
+            <div class="l-stat"><b class="o">Armor</b><span>How much damage it shrugs off. Ceramic and metal are tough. Foam and paper are not.</span></div>
+            <div class="l-stat"><b class="o">Balance</b><span>How well it stays upright. Wide flat bases balance well. Tall thin things tip over.</span></div>
+            <p class="l-fine">Stats always add up to 24, so every card is fair. A pan trades speed for power. A rubber duck trades power for speed. The purple number on a card is its level. Levels add health, so a card you fight with often gets stronger.</p>
+          </div>
+        </div>
+        <div class="l-rarity">
+          <div class="l-rcard r-common"><span class="o">Common</span><small>No 3D model yet. Uses a simple shape.</small></div>
+          <div class="l-rcard r-rare"><span class="o">Rare</span><small>Lux3D 3D model, cut into chunks.</small></div>
+          <div class="l-rcard r-epic"><span class="o">Epic</span><small>Lux3D found 2 to 4 real parts.</small></div>
+          <div class="l-rcard r-legendary"><span class="o">Legendary</span><small>Lux3D found 5 or more real parts.</small></div>
+          <div class="l-weights panel">
+            <div class="panel-head o">Weight class</div>
+            <div class="body">
+              <p><b>Light</b> under 200 g. Fast, but easy to knock out of the ring.</p>
+              <p><b>Middle</b> up to 1.2 kg. Balanced.</p>
+              <p><b>Heavy</b> over 1.2 kg. Slow, but very hard to push.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ELEMENTS -->
+    <section class="l-sec" id="elements">
+      <h2 class="o">Five elements</h2>
+      <p class="l-lead">The AI picks an element from what your object is made of. Each one has its own hit effects and one perk.</p>
+      <div class="l-elements">
+        <div class="l-el" style="--ec:#ff6a1a"><span class="ei">🔥</span><b class="o">Fire</b><small>Wood, candles, spicy things</small><p>Special move sets the target on fire for 2 seconds.</p></div>
+        <div class="l-el" style="--ec:#1f8bff"><span class="ei">💧</span><b class="o">Water</b><small>Glass, rubber, bottles</small><p>Gets 1 energy back every time it is hit.</p></div>
+        <div class="l-el" style="--ec:#ffd000"><span class="ei">⚡</span><b class="o">Lightning</b><small>Metal, batteries, gadgets</small><p>Special move hits 25 percent harder.</p></div>
+        <div class="l-el" style="--ec:#2fd1b8"><span class="ei">🌪️</span><b class="o">Air</b><small>Fabric, foam, paper, shoes</small><p>Dodge costs 2 energy and jumps go higher.</p></div>
+        <div class="l-el" style="--ec:#b07a3c"><span class="ei">🪨</span><b class="o">Earth</b><small>Ceramic, stone, clay, plants</small><p>Takes 15 percent less damage.</p></div>
+      </div>
+    </section>
+
+    <!-- BATTLE RULES -->
+    <section class="l-sec" id="battle">
+      <h2 class="o">Battle rules</h2>
+      <p class="l-lead">Fighters move on their own. You choose when to spend energy. Pause any time with P or the pause button.</p>
+      <div class="l-grid3">
+        <div class="panel l-rule">
+          <div class="panel-head o">Energy</div>
+          <div class="body">
+            <div class="l-energy"><i></i></div>
+            <p>Each fighter has 10 energy. It refills every second. Quick fighters refill faster.</p>
+            <ul class="l-costs">
+              <li><span class="cost o">4</span> Special move</li>
+              <li><span class="cost o">3</span> Dodge</li>
+              <li><span class="cost o">2</span> Jump</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel l-rule">
+          <div class="panel-head o">Parts and health</div>
+          <div class="body">
+            <p>Health is spread across the real parts. The body holds 40 percent. The rest is split by size.</p>
+            <p>When a part runs out it breaks off and flies away as debris. Debris can hit other fighters too.</p>
+            <p>If the body breaks, the fighter falls apart.</p>
+          </div>
+        </div>
+        <div class="panel l-rule">
+          <div class="panel-head o">How to win</div>
+          <div class="body">
+            <p><b>Shatter</b> the other fighter, or <b>knock it off</b> the edge.</p>
+            <p>After 45 seconds the arena starts to shrink. At 95 seconds the fighter with the most health wins.</p>
+            <p>Phone players get Attack, Jump and Dodge buttons. Nobody pressing? The AI plays.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="l-sec alt" id="progress">
+      <h2 class="o">Level up and climb</h2>
+      <p class="l-lead">Your first pick in the deck is your leader. Trophies follow the leader.</p>
+      <div class="l-grid3">
+        <div class="panel l-rule">
+          <div class="panel-head o">Trophies</div>
+          <div class="body"><p>Your leader wins: <b>+30</b>. Your leader loses: <b>−12</b>. Trophies unlock new arenas.</p></div>
+        </div>
+        <div class="panel l-rule">
+          <div class="panel-head o">Card levels</div>
+          <div class="body"><p>Every fighter in a match earns XP. The winner earns double. Each level adds 5 percent health, up to level 10.</p></div>
+        </div>
+        <div class="panel l-rule">
+          <div class="panel-head o">Arenas</div>
+          <div class="body">
+            <ol class="l-arenas">
+              <li>Kitchen Counter <small>0</small></li>
+              <li>Garage Workbench <small>200</small></li>
+              <li>Dusty Attic <small>500</small></li>
+              <li>Junkyard <small>900</small></li>
+              <li>The Big Drawer <small>1400</small></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT / CTA -->
+    <section class="l-sec">
+      <div class="panel l-final">
+        <div>
+          <h2 class="o">Ready to empty the drawer?</h2>
+          <p>Sign in with a player name, pick two starter cards and fight. Add your own things any time.</p>
+        </div>
+        <div class="l-cta" id="final-cta"></div>
+      </div>
+    </section>
+
+    <footer class="l-foot">
+      <div class="l-badge"><span class="mark o">J</span><span class="o">Junk Drawer Arena</span></div>
+      <p>Built for the Manycore Aholo Global 3D AI Hackathon. 3D models and part splitting by Aholo Lux3D. Fighter cards by an AI agent.</p>
+      <p class="l-fine">Your profile is stored in this browser only. Photos you upload are sent to Aholo Lux3D to build the model.</p>
+    </footer>
+
+    <!-- SIGN IN -->
+    <div id="signin" class="modal" hidden>
+      <form class="panel modal-card" id="signin-form">
+        <div class="panel-head o">Sign in<button type="button" class="x" data-close="signin" aria-label="Close">✕</button></div>
+        <div class="modal-body">
+          <label class="field">Player name<input id="signin-name" maxlength="24" placeholder="Prasanna" autocomplete="nickname" required /></label>
+          <p class="l-fine">No password. Your name, trophies and card levels stay in this browser. Log out from Options in the game.</p>
+          <button type="submit" class="cr-btn yellow wide"><span class="o">Sign in and play</span></button>
+        </div>
+      </form>
+    </div>
+
+    <script type="module" src="./src/landing.js"></script>
+  </body>
+</html>

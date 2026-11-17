@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Join Junk Drawer Arena</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="phone">
+    <div class="ph">
+      <div class="brand"><div class="ribbon o">Junk Drawer Arena</div></div>
+
+      <div id="view-make" class="panel box">
+        <div class="panel-head o">Add your thing</div>
+        <div class="body">
+          <label class="snap" id="snap">
+            <input type="file" id="photo" accept="image/*" capture="environment" />
+            <span><b>Take a photo</b>Pick one small object near you. Clear light works best.</span>
+          </label>
+          <label class="field">Or describe it<input type="text" id="label" placeholder="a rubber duck" maxlength="80" /></label>
+          <label class="field">Your name<input type="text" id="player" placeholder="Player" maxlength="24" /></label>
+          <button class="cr-btn yellow wide" id="go"><span class="o">Build my fighter</span></button>
+          <div class="err" id="err"></div>
+        </div>
+      </div>
+
+      <div id="view-mine" class="panel box" hidden>
+        <div class="panel-head o">Your fighters</div>
+        <div class="body"><div id="mine"></div></div>
+      </div>
+
+      <div id="view-pad" class="panel box" hidden>
+        <div class="panel-head o" id="pad-name"></div>
+        <div class="body">
+          <div class="state" id="pad-state">Waiting for a match</div>
+          <div class="hpbig"><i id="pad-hp" style="width:100%"></i></div>
+          <div class="enbig" title="Energy"><i id="pad-en" style="width:40%"></i></div>
+          <div class="pad">
+            <button class="cr-btn yellow atk" data-a="attack" id="b-atk"><span class="cost o">4</span><span class="o">Attack</span></button>
+            <button class="cr-btn blue" data-a="jump"><span class="cost o">2</span><span class="o">Jump</span></button>
+            <button class="cr-btn green" data-a="dodge"><span class="cost o">3</span><span class="o">Dodge</span></button>
+          </div>
+          <div class="quote" id="pad-quote"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./src/phone.js"></script>
+  </body>
+</html>

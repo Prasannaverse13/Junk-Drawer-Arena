@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play · Junk Drawer Arena</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ffb81c'/><text x='50' y='72' font-size='64' text-anchor='middle' font-family='Arial Black' fill='white' stroke='black' stroke-width='4'>J</text></svg>" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body data-screen="title">
+    <canvas id="view"></canvas>
+    <canvas id="impact"></canvas>
+    <div class="sky-fade"></div>
+    <div id="floaters"></div>
+
+    <!-- TOP RESOURCE BAR (home + cards) -->
+    <header id="topbar">
+      <div class="profile">
+        <div class="lvl"><span class="o" id="tb-level">1</span></div>
+        <div>
+          <div class="pname o" id="tb-name">Player</div>
+          <div class="psub">Junk Drawer Arena</div>
+        </div>
+      </div>
+      <div class="res">
+        <div class="chip" title="Trophies"><i class="ic trophy"></i><span class="o" id="tb-wins">0</span></div>
+        <div class="chip" title="Lux3D credits"><i class="ic coin"></i><span class="o" id="tb-credits">0</span></div>
+        <div class="chip" title="Fighters built"><i class="ic gem"></i><span class="o" id="tb-fighters">0</span></div>
+      </div>
+    </header>
+
+    <!-- HOME / BATTLE TAB -->
+    <main id="s-title" class="screen">
+      <div class="banner">
+        <div class="ribbon o">Junk Drawer Arena</div>
+        <div class="arena-tag o">Arena 1: The Kitchen Counter</div>
+      </div>
+
+      <div class="side">
+        <button class="side-btn" id="side-join"><i class="ic phone"></i><span class="o">Join</span></button>
+        <button class="side-btn" id="side-add"><i class="ic cam"></i><span class="o">Add</span></button>
+      </div>
+
+      <div class="battle-row">
+        <button class="cr-btn yellow huge" id="btn-play"><span class="o">Battle</span></button>
+        <button class="cr-btn blue" id="btn-quick"><span class="o">Quick<br />fight</span></button>
+      </div>
+
+      <div class="slots-row" id="build-slots"></div>
+    </main>
+
+    <!-- CARDS TAB (deck builder) -->
+    <section id="s-garage" class="screen">
+      <div class="cards-wrap">
+        <div class="panel deck-panel">
+          <div class="panel-head o">Battle deck <small id="tray-hint">Pick 2 to 4 fighters</small></div>
+          <div class="deck" id="slots"></div>
+          <div class="deck-foot">
+            <div class="avg" id="deck-avg"></div>
+            <button class="cr-btn yellow" id="btn-fight" disabled><span class="o">Battle</span></button>
+          </div>
+        </div>
+        <div class="panel coll-panel">
+          <div class="panel-head o">Card collection <small id="coll-count"></small></div>
+          <div class="grid" id="roster"></div>
+        </div>
+      </div>
+      <aside id="spec" class="spec panel" hidden></aside>
+    </section>
+
+    <!-- VERSUS -->
+    <section id="s-versus" class="screen"><div id="vs-wrap"></div></section>
+
+    <!-- FIGHT HUD -->
+    <section id="s-fight" class="screen">
+      <div id="hud"></div>
+      <div class="time-box"><small>Time left</small><b class="o" id="timer"></b></div>
+      <button class="cr-btn blue pause-btn" id="btn-pause" aria-label="Pause"><span class="o">II</span></button>
+      <div id="caption"></div>
+      <div id="center-msg" class="o"></div>
+      <div class="hint-keys" id="keys">Keys: Q W E for fighter 1 and I O P for fighter 2</div>
+    </section>
+
+    <!-- RESULT -->
+    <section id="s-result" class="screen">
+      <div class="result">
+        <i class="ic crown big"></i>
+        <div class="res-label o" id="res-stamp">Winner!</div>
+        <div class="res-name o" id="res-name"></div>
+        <div class="res-title o" id="res-title"></div>
+        <div class="reward" id="res-reward"></div>
+        <div class="panel recap">
+          <p id="res-recap">…</p>
+          <div id="res-stats"></div>
+        </div>
+        <div class="row">
+          <a id="res-clip" class="cr-btn blue" download="junk-drawer-arena.webm" hidden><span class="o">Save clip</span></a>
+          <button class="cr-btn green" id="res-rematch"><span class="o">Rematch</span></button>
+          <button class="cr-btn yellow" id="res-lobby"><span class="o">OK</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAUSE -->
+    <div id="pause" class="modal" hidden>
+      <div class="panel modal-card pause-card">
+        <div class="panel-head o">Paused</div>
+        <div class="modal-body">
+          <button class="cr-btn green wide" id="pz-resume"><span class="o">Resume</span></button>
+          <button class="cr-btn blue wide" id="pz-restart"><span class="o">Restart match</span></button>
+          <button class="cr-btn red wide" id="pz-exit"><span class="o">Exit to home</span></button>
+          <p class="pz-hint">Press P or Esc to pause and resume.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav id="tabs">
+      <button class="tab" data-tab="add"><i class="ic cam"></i><span class="o">Add</span></button>
+      <button class="tab" data-tab="garage"><i class="ic cards"></i><span class="o">Cards</span><em id="tab-badge" hidden></em></button>
+      <button class="tab" data-tab="title"><i class="ic swords"></i><span class="o">Battle</span></button>
+      <button class="tab" data-tab="join"><i class="ic phone"></i><span class="o">Join</span></button>
+      <button class="tab" data-tab="settings"><i class="ic gear"></i><span class="o">Options</span></button>
+    </nav>
+
+    <!-- ADD FIGHTER MODAL -->
+    <div id="forge" class="modal" hidden>
+      <form class="panel modal-card" id="add-form">
+        <div class="panel-head o">Add your thing<button type="button" class="x" id="forge-cancel" aria-label="Close">✕</button></div>
+        <div class="modal-body">
+          <label class="drop" id="drop">
+            <input type="file" id="add-photo" accept="image/*" />
+            <img id="drop-img" alt="" hidden />
+            <span id="drop-text"><b class="o">Drop a photo</b>or tap to choose. One object in clear light works best.</span>
+          </label>
+          <label class="field">Or describe it<input id="add-label" placeholder="a rubber duck" maxlength="80" autocomplete="off" /></label>
+          <label class="field">Your name<input id="add-player" placeholder="Player" maxlength="24" autocomplete="off" /></label>
+          <button type="submit" class="cr-btn yellow wide"><span class="o">Build fighter</span></button>
+        </div>
+      </form>
+    </div>
+
+    <!-- JOIN MODAL -->
+    <div id="join" class="modal" hidden>
+      <div class="panel modal-card">
+        <div class="panel-head o">Join from a phone<button type="button" class="x" data-close="join" aria-label="Close">✕</button></div>
+        <div class="modal-body center">
+          <img id="qr" alt="QR code to join" />
+          <p>Scan with a phone on the same Wi‑Fi. Snap a photo, then control your fighter.</p>
+          <code id="join-url"></code>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settings" class="modal" hidden>
+      <div class="panel modal-card">
+        <div class="panel-head o">Options<button type="button" class="x" data-close="settings" aria-label="Close">✕</button></div>
+        <div class="modal-body">
+          <div class="profile-row">
+            <div class="lvl"><span class="o">★</span></div>
+            <div class="who"><b class="o" id="set-name">Player</b><small id="set-trophies">0 trophies</small></div>
+            <button type="button" class="cr-btn red" id="btn-logout"><span class="o">Log out</span></button>
+          </div>
+          <label class="toggle"><input type="checkbox" id="opt-sfx" /> <span>Sound effects</span></label>
+          <label class="toggle"><input type="checkbox" id="opt-voice" /> <span>Commentator voice</span></label>
+          <label class="toggle"><input type="checkbox" id="opt-rec" checked /> <span>Record a clip of each match</span></label>
+          <div id="pills"></div>
+          <a class="help-link" href="/#how">How the game works</a>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

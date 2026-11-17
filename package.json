@@ -1,0 +1,36 @@
+{
+  "name": "junk-drawer-arena",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Snap real things from your home. Aholo Lux3D turns them into 3D fighters made of real parts. They battle in a physics arena.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c blue,magenta \"node --watch server/index.js\" \"vite\"",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "play": "vite build && node server/index.js",
+    "seed": "node scripts/seed.js",
+    "check": "node scripts/check-keys.js",
+    "simtest": "node scripts/sim-test.js 40"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.14.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "@fontsource/archivo-black": "^5.3.0",
+    "@fontsource/lilita-one": "^5.3.0",
+    "@gltf-transform/core": "^4.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1",
+    "qrcode": "^1.5.4",
+    "three": "^0.170.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "vite": "^5.4.10"
+  }
+}
