@@ -62,24 +62,24 @@ Why part split matters: in most games a model is one shape. Here the mug handle 
 
 ```mermaid
 flowchart TD
-    A[Player scans QR code with phone] --> B[Phone page: take photo or type text]
-    B --> C[POST /api/fighters]
-    C --> D{Pipeline queue}
-    D --> E[Agent builds card<br/>starts at once]
-    D --> F[Upload photo to Lux3D OUS]
-    F --> G[Lux3D img-to-3d or text-to-3d]
-    G --> H[Poll task until done]
-    H --> I[Download GLB]
-    I --> J[Lux3D part-split]
-    J --> K[Poll task and download split GLB]
-    K --> L[Count parts with gltf-transform]
-    E --> M[Fighter ready]
+    A["Player scans QR code with phone"] --> B["Phone page: photo or text"]
+    B --> C["POST api fighters"]
+    C --> D{"Pipeline queue"}
+    D --> E["AI agent builds the card"]
+    D --> F["Upload photo to Lux3D OUS"]
+    F --> G["Lux3D image to 3D or text to 3D"]
+    G --> H["Poll task until done"]
+    H --> I["Download GLB model"]
+    I --> J["Lux3D part split"]
+    J --> K["Poll task and download split GLB"]
+    K --> L["Count parts with gltf transform"]
+    E --> M["Fighter ready"]
     L --> M
-    M --> N[Browser loads GLB]
-    N --> O[Convex hull collider per part]
-    O --> P[Fighter joins the arena]
-    P --> Q[Battle]
-    Q --> R[XP, trophies and recap]
+    M --> N["Browser loads the GLB"]
+    N --> O["Convex hull collider per part"]
+    O --> P["Fighter joins the arena"]
+    P --> Q["Battle"]
+    Q --> R["XP trophies and recap"]
 ```
 
 Detail of one fighter build:
@@ -93,27 +93,27 @@ sequenceDiagram
     participant Game as Browser game
 
     Phone->>Server: photo or text
-    Server-->>Phone: fighter id, status building
+    Server-->>Phone: fighter id and status building
     par Card
-        Server->>Agent: photo + prompt
+        Server->>Agent: photo and prompt
         Agent-->>Server: card JSON
-    and 3D
+    and Model
         Server->>Lux: upload photo
         Lux-->>Server: hosted URL
-        Server->>Lux: img-to-3d (G1-Turbo)
+        Server->>Lux: img to 3D G1 Turbo
         loop poll
             Server->>Lux: get task
         end
         Lux-->>Server: GLB URL
-        Server->>Lux: part-split(GLB URL)
+        Server->>Lux: part split with GLB URL
         loop poll
             Server->>Lux: get task
         end
         Lux-->>Server: split GLB URL
     end
-    Server->>Server: save files, count parts
-    Server-->>Game: fighter ready (over /api and WebSocket)
-    Game->>Server: GET /files/id/model.glb
+    Server->>Server: save files and count parts
+    Server-->>Game: fighter ready
+    Game->>Server: GET model GLB
     Game->>Game: build colliders and fight
 ```
 
@@ -125,38 +125,38 @@ The pipeline keeps a queue. Lux3D allows one task per account at a time, so the 
 
 ```mermaid
 flowchart LR
-    subgraph PH[Phone]
-        P1[join.html<br/>add fighter and control pad]
+    subgraph PH["Phone"]
+        P1["join.html: add fighter and control pad"]
     end
-    subgraph BR[Browser Host]
-        H1[index.html<br/>landing page]
-        H2[play.html<br/>game]
-        H3[three.js view]
-        H4[Rapier physics]
-        H5[VFX and SFX]
+    subgraph BR["Browser host"]
+        H1["index.html landing page"]
+        H2["play.html game"]
+        H3["three.js view"]
+        H4["Rapier physics"]
+        H5["VFX and SFX"]
         H2 --> H3
         H2 --> H4
         H3 --> H5
     end
-    subgraph SV[Server Node]
-        S1[Express REST]
-        S2[WebSocket relay]
-        S3[Pipeline queue]
-        S4[Agent]
-        S5[JSON store and files]
+    subgraph SV["Node server"]
+        S1["Express REST"]
+        S2["WebSocket relay"]
+        S3["Pipeline queue"]
+        S4["Agent"]
+        S5["JSON store and files"]
         S1 --> S3
         S3 --> S4
         S3 --> S5
     end
-    subgraph EX[External]
-        X1[Aholo Lux3D API]
-        X2[OpenAI gpt-6-luna]
-        X3[Anthropic Claude<br/>optional fallback]
+    subgraph EX["External services"]
+        X1["Aholo Lux3D API"]
+        X2["OpenAI gpt-6-luna"]
+        X3["Anthropic Claude fallback"]
     end
-    P1 -- photo and actions --> S1
-    P1 <-- control --> S2
-    H2 <-- state and actions --> S2
-    H2 -- GLB and cards --> S1
+    P1 -->|photo and actions| S1
+    P1 <-->|control| S2
+    H2 <-->|state and actions| S2
+    H2 -->|GLB and cards| S1
     S3 --> X1
     S4 --> X2
     S4 -.-> X3
